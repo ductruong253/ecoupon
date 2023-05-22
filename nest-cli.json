@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/ecoupon/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/ecoupon/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/ecoupon",
+  "projects": {
+    "ecoupon": {
+      "type": "application",
+      "root": "apps/ecoupon",
+      "entryFile": "main",
+      "sourceRoot": "apps/ecoupon/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/ecoupon/tsconfig.app.json"
+      }
+    },
+    "coupon-service": {
+      "type": "application",
+      "root": "apps/coupon-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/coupon-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/coupon-service/tsconfig.app.json"
+      }
+    },
+    "coupon-manager": {
+      "type": "application",
+      "root": "apps/coupon-manager",
+      "entryFile": "main",
+      "sourceRoot": "apps/coupon-manager/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/coupon-manager/tsconfig.app.json"
+      }
+    },
+    "entities": {
+      "type": "library",
+      "root": "libs/entities",
+      "entryFile": "index",
+      "sourceRoot": "libs/entities/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/entities/tsconfig.lib.json"
+      }
+    }
+  }
+}
