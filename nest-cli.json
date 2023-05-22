@@ -45,6 +45,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/entities/tsconfig.lib.json"
       }
+    },
+    "sysad": {
+      "type": "application",
+      "root": "apps/sysad",
+      "entryFile": "main",
+      "sourceRoot": "apps/sysad/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/sysad/tsconfig.app.json"
+      }
     }
   }
 }
