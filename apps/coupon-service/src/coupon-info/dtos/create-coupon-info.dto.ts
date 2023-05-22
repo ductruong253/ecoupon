@@ -1,6 +1,6 @@
 import { IsDate, IsEnum, IsNumber, IsString, Max, Min } from 'class-validator';
-import { CouponTypeEnum } from '../enums/coupon-type.enum';
-import { CurrencyEnum } from '../enums/currency.enum';
+import { CouponTypeEnum, CurrencyEnum } from '@app/common';
+
 import { Type } from 'class-transformer';
 
 export class CreateCouponInfoDto {

@@ -1,4 +1,4 @@
-import { CustomerGroup } from 'apps/coupon-manager/src/customer-groups/customer-groups.entity';
+import { CustomerGroup } from './customer-groups.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

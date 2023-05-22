@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { CustomersController } from './customers.controller';
 import { CustomersService } from './customers.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Customer } from './customer.entity';
+import { Customer } from '@app/common';
 import { JwtModule } from '@nestjs/jwt';
 import { CustomerGroupsService } from 'apps/sysad/src/customer-groups/customer-groups.service';
-import { CustomerGroup } from 'apps/sysad/src/customer-groups/customer-groups.entity';
+import { CustomerGroup } from '@app/common';
 
 @Module({
   imports: [

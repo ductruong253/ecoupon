@@ -1,4 +1,4 @@
-import { Customer } from 'apps/coupon-manager/src/customers/customer.entity';
+import { Customer } from './customer.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

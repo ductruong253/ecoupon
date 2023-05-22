@@ -1,8 +1,6 @@
-import { Expose, Transform } from 'class-transformer';
-import { ApprovalStatusEnum } from '../enums/approval-status.enum';
-import { CouponTypeEnum } from '../enums/coupon-type.enum';
-import { CurrencyEnum } from '../enums/currency.enum';
-import { CouponStatusEnum } from '../enums/coupon-status.enum';
+import { Expose } from 'class-transformer';
+import { ApprovalStatusEnum, CouponTypeEnum, CurrencyEnum, CouponStatusEnum } from '@app/common';
+
 
 export class CouponInfoDto {
   @Expose()
