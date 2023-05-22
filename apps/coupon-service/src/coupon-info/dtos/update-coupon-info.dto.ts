@@ -1,8 +1,6 @@
 import { IsDate, IsEnum, IsNumber, IsString, Max, Min } from 'class-validator';
-import { CouponTypeEnum } from '../enums/coupon-type.enum';
-import { CurrencyEnum } from '../enums/currency.enum';
+import { CouponTypeEnum, CurrencyEnum, CouponStatusEnum } from '@app/common';
 import { Type } from 'class-transformer';
-import { CouponStatusEnum } from '../enums/coupon-status.enum';
 
 export class UpdateCouponInfoDto {
   @IsString()

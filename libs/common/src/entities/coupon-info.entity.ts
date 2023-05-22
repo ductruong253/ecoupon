@@ -1,8 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { ApprovalStatusEnum } from './enums/approval-status.enum';
-import { CouponTypeEnum } from './enums/coupon-type.enum';
-import { CurrencyEnum } from './enums/currency.enum';
-import { CouponStatusEnum } from './enums/coupon-status.enum';
+import {
+  ApprovalStatusEnum,
+  CouponTypeEnum,
+  CurrencyEnum,
+  CouponStatusEnum,
+} from '../enums';
 
 @Entity()
 export class CouponInfo {
@@ -22,8 +24,8 @@ export class CouponInfo {
   couponCode: string;
 
   @Column({
-    type: "enum",
-    enum: ApprovalStatusEnum
+    type: 'enum',
+    enum: ApprovalStatusEnum,
   })
   approvalStatus: ApprovalStatusEnum;
 
@@ -31,8 +33,8 @@ export class CouponInfo {
   isActive: boolean;
 
   @Column({
-    type: "enum",
-    enum: CouponStatusEnum
+    type: 'enum',
+    enum: CouponStatusEnum,
   })
   status: CouponStatusEnum;
 
@@ -44,8 +46,8 @@ export class CouponInfo {
   conditions: string;
 
   @Column({
-    type: "enum",
-    enum: CouponTypeEnum
+    type: 'enum',
+    enum: CouponTypeEnum,
   })
   type: CouponTypeEnum;
 
@@ -53,8 +55,8 @@ export class CouponInfo {
   maxDiscountValue: number;
 
   @Column({
-    type: "enum",
-    enum: CurrencyEnum
+    type: 'enum',
+    enum: CurrencyEnum,
   })
   unit: CurrencyEnum;
 

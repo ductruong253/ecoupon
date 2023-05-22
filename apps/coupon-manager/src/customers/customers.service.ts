@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Customer } from './customer.entity';
+import { Customer } from '@app/common';
 import { Repository } from 'typeorm';
 import { CreateCustomerDto } from './dtos/create-customer.dto';
 import { CustomerGroupsService } from 'apps/coupon-manager/src/customer-groups/customer-groups.service';

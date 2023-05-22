@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CustomerGroup } from './customer-groups.entity';
+import { CustomerGroup } from '@app/common';
 import { Repository } from 'typeorm';
 import { CreateUserGroupDto } from './dtos/create-user-group.dto';
 

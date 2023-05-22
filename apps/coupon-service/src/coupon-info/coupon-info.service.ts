@@ -5,10 +5,9 @@ import {
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CouponInfo } from './coupon-info.entity';
+import { CouponInfo } from '@app/common';
 import { CreateCouponInfoDto } from './dtos/create-coupon-info.dto';
-import { ApprovalStatusEnum } from './enums/approval-status.enum';
-import { CouponStatusEnum } from './enums/coupon-status.enum';
+import { ApprovalStatusEnum, CouponStatusEnum } from '@app/common';
 import { UpdateCouponInfoDto } from './dtos/update-coupon-info.dto';
 
 @Injectable()
