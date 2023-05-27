@@ -1,17 +1,15 @@
-import { IsEmail, IsNumber, IsString } from "class-validator"
+import { IsEmail, IsNumber, IsString } from 'class-validator';
 
 export class CreateCustomerDto {
+  @IsString()
+  fullName: string;
 
-    @IsString()
-    fullName: string
+  @IsNumber()
+  groupId: number;
 
-    @IsNumber()
-    groupId: number
+  @IsEmail()
+  email: string;
 
-    @IsEmail()
-    email: string
-
-    @IsString()
-    password: string
-    
+  @IsString()
+  password: string;
 }
