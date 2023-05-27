@@ -15,7 +15,15 @@ export class UserService {
     return this.repo.save(user);
   }
 
-  findOneByEmail(email: string) {
+  getUserByEmail(email: string) {
     return this.repo.findOneBy({ email });
+  }
+
+  async getUserById(id: number) {
+    if (!id) {
+      return null;
+    }
+    const customer = await this.repo.findOneBy({ id });
+    return customer;
   }
 }
