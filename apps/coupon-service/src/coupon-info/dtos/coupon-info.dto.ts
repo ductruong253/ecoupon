@@ -1,6 +1,10 @@
 import { Expose } from 'class-transformer';
-import { ApprovalStatusEnum, CouponTypeEnum, CurrencyEnum, CouponStatusEnum } from '@app/common';
-
+import {
+  ApprovalStatusEnum,
+  CouponTypeEnum,
+  CurrencyEnum,
+  CouponStatusEnum,
+} from '@app/common';
 
 export class CouponInfoDto {
   @Expose()

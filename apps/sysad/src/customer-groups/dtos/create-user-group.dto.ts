@@ -1,19 +1,18 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateUserGroupDto {
+  @IsString()
+  groupName: string;
 
-    @IsString()
-    groupName: string
+  @IsString()
+  groupDescription: string;
 
-    @IsString()
-    groupDescription: string
+  @IsString()
+  phoneNum: string;
 
-    @IsString()
-    phoneNum: string
+  @IsString()
+  address: string;
 
-    @IsString()
-    address: string
-
-    @IsNumber()
-    groupId: number
+  @IsNumber()
+  groupId: number;
 }

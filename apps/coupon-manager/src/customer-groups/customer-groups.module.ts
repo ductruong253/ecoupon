@@ -2,9 +2,8 @@ import { Module } from '@nestjs/common';
 import { CustomerGroupsService } from './customer-groups.service';
 import { CustomerGroupsController } from './customer-groups.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CustomerGroup } from './customer-groups.entity';
+import { CustomerGroup, Customer } from '@app/common';
 import { JwtModule } from '@nestjs/jwt';
-import { Customer } from 'apps/coupon-manager/src/customers/customer.entity';
 
 @Module({
   imports: [

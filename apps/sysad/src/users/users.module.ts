@@ -14,11 +14,11 @@ import { LocalStrategy } from 'apps/sysad/src/auth/local.strategy';
     JwtModule.register({
       secret: 'secret',
       signOptions: {
-        expiresIn: '1d'
+        expiresIn: '1d',
       },
-    })
+    }),
   ],
   controllers: [UsersController],
-  providers: [UsersService, AuthService, JwtStrategy, LocalStrategy]
+  providers: [UsersService, AuthService, JwtStrategy, LocalStrategy],
 })
 export class UsersModule {}

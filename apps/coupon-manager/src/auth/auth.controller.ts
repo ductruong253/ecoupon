@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 import { LoginCustomerDto } from 'apps/coupon-manager/src/customers/dtos/login-customer.dto';
 import { SessionGuard } from 'apps/coupon-manager/src/guards/session.guard';
 import { CurrentCustomer } from 'apps/coupon-manager/src/customers/decorators/current-customer.decorator';
-import { Customer } from 'apps/coupon-manager/src/customers/customer.entity';
+import { Customer } from '@app/common';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
