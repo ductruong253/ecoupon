@@ -1,18 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { UsersService } from 'apps/sysad/src/users/users.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'apps/sysad/src/users/user.entity';
-import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from 'apps/sysad/src/users/users.module';
+import { EcouponUser } from '@app/common';
+import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from './local.strategy';
+import { JwtModule } from '@nestjs/jwt';
+import { UserService } from '../user/user.service';
+import { LocalStrategy } from './local-strategy';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
-    UsersModule,
+    TypeOrmModule.forFeature([EcouponUser]),
+    UserModule,
     PassportModule,
     JwtModule.register({
       secret: 'secret',
@@ -20,6 +20,6 @@ import { LocalStrategy } from './local.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UsersService, LocalStrategy],
+  providers: [AuthService, UserService, LocalStrategy],
 })
 export class AuthModule {}

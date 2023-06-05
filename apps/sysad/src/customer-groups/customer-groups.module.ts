@@ -12,11 +12,11 @@ import { Customer } from '@app/common';
     JwtModule.register({
       secret: 'secret',
       signOptions: {
-        expiresIn: '1d'
+        expiresIn: '1d',
       },
-    })
+    }),
   ],
   providers: [CustomerGroupsService],
-  controllers: [CustomerGroupsController]
+  controllers: [CustomerGroupsController],
 })
 export class CustomerGroupsModule {}

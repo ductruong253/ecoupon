@@ -16,8 +16,8 @@ export class UsersService {
     if (!id) {
       return null;
     }
-    console.log(id)
-    return this.repo.findOneBy({id});
+    console.log(id);
+    return this.repo.findOneBy({ id });
   }
 
   findOneByEmail(email: string) {
@@ -41,4 +41,3 @@ export class UsersService {
     return this.repo.remove(user);
   }
 }
-

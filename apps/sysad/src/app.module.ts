@@ -25,16 +25,16 @@ import { UsersModule } from './users/users.module';
           password: config.get('DB_PASSWORD'),
           database: config.get('DB_NAME'),
           synchronize: true,
-          autoLoadEntities: true
-        }
-      }
+          autoLoadEntities: true,
+        };
+      },
     }),
     UsersModule,
     AuthModule,
     CustomerGroupsModule,
-    CustomersModule
+    CustomersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

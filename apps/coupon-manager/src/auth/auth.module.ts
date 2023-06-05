@@ -5,11 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
-import { Customer } from 'apps/coupon-manager/src/customers/customer.entity';
+import { Customer, CustomerGroup } from '@app/common';
 import { CustomersService } from 'apps/coupon-manager/src/customers/customers.service';
 import { CustomersModule } from 'apps/coupon-manager/src/customers/customers.module';
 import { CustomerGroupsService } from 'apps/coupon-manager/src/customer-groups/customer-groups.service';
-import { CustomerGroup } from 'apps/coupon-manager/src/customer-groups/customer-groups.entity';
 
 @Module({
   imports: [

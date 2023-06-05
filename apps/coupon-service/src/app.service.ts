@@ -9,7 +9,6 @@ export class AppService {
 
   @Get()
   getHello(): string {
-    const secret = this.configService.get('secret');
     return 'OK';
   }
 }

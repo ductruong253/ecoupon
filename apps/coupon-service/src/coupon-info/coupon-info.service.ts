@@ -85,7 +85,8 @@ export class CouponInfoService {
         vendorCode,
         couponCode,
       );
-      return true;
+      if (coupon) return true;
+      return false;
     } catch (err) {
       return false;
     }
