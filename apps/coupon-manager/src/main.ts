@@ -8,6 +8,7 @@ async function bootstrap() {
     res.removeHeader('date');
     next();
   });
+  app.enableCors();
   await app.listen(8082);
 }
 bootstrap();
