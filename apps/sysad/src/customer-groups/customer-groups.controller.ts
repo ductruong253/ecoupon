@@ -19,13 +19,14 @@ export class CustomerGroupsController {
   @UseGuards(AuthGuard('jwt'))
   async createUserGroup(@Body() body: CreateUserGroupDto) {
     const group = await this.groupService.create(body);
-    return group;
+    return {group: group};
   }
 
   @Get('/list/all')
   @UseGuards(AuthGuard('jwt'))
   async listAllGroup() {
-    return this.groupService.listUserGroups();
+    const groups = await this.groupService.listUserGroups();
+    return {groups: groups}
   }
 
   @Get('/id/:id')
@@ -35,6 +36,6 @@ export class CustomerGroupsController {
     if (!group) {
       throw new NotFoundException('group not found');
     }
-    return group;
+    return {group: group};
   }
 }

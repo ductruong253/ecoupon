@@ -20,12 +20,15 @@ export class CustomersController {
   async getById(@Param('id') id: string) {
     const customer = await this.customerService.getCustomerById(parseInt(id));
     if (!customer) throw new NotFoundException('customer not found');
-    return customer;
+    delete customer.password;
+    return {customer: customer};
   }
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
   async createCustomer(@Body() body: CreateCustomerDto) {
-    return await this.customerService.createCustomer(body);
+    const customer = await this.customerService.createCustomer(body);
+    delete customer.password;
+    return {customer: customer}
   }
 }
