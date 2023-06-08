@@ -7,10 +7,10 @@ export class CustomerGroup {
   id: number;
 
   @Column()
-  groupName: string;
+  code: string;
 
   @Column()
-  groupDescription: string;
+  description: string;
 
   @Column()
   phoneNum: string;
