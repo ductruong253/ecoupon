@@ -21,7 +21,7 @@ export class CustomersController {
     const customer = await this.customerService.getCustomerById(parseInt(id));
     if (!customer) throw new NotFoundException('customer not found');
     delete customer.password;
-    return {customer: customer};
+    return { customer: customer };
   }
 
   @Post()
@@ -29,6 +29,6 @@ export class CustomersController {
   async createCustomer(@Body() body: CreateCustomerDto) {
     const customer = await this.customerService.createCustomer(body);
     delete customer.password;
-    return {customer: customer}
+    return { customer: customer };
   }
 }

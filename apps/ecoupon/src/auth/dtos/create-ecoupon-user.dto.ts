@@ -1,15 +1,15 @@
-import { IsEmail, IsString } from "class-validator";
+import { IsEmail, IsString } from 'class-validator';
 
 export class CreateEcouponUserDto {
-    @IsString()
-    fullname: string;
+  @IsString()
+  fullname: string;
 
-    @IsEmail()
-    email: string;
+  @IsEmail()
+  email: string;
 
-    @IsString()
-    password: string;
+  @IsString()
+  password: string;
 
-    @IsString()
-    phoneNumber: string;
+  @IsString()
+  phoneNumber: string;
 }
