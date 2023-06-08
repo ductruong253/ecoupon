@@ -1,8 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CustomerGroup } from '@app/common';
 import { Repository } from 'typeorm';
 import { CreateUserGroupDto } from './dtos/create-user-group.dto';
+import { UpdateUserGroupDto } from './dtos/update-user-group.dto';
 
 @Injectable()
 export class CustomerGroupsService {
@@ -10,9 +15,20 @@ export class CustomerGroupsService {
     @InjectRepository(CustomerGroup) private repo: Repository<CustomerGroup>,
   ) {}
 
-  create(createGroupdto: CreateUserGroupDto) {
-    const group = this.repo.create(createGroupdto);
-    return this.repo.save(group);
+  create(createGroupDto: CreateUserGroupDto) {
+    const code = createGroupDto.code;
+    const existingGroup = this.repo.findOneBy({ code });
+    if (existingGroup) throw new BadRequestException('group code existed');
+    const newGroup = this.repo.create(createGroupDto);
+    return this.repo.save(newGroup);
+  }
+
+  async update(id: number, attrs: UpdateUserGroupDto) {
+    const group = await this.repo.findOneBy({ id });
+    if (!group) throw new NotFoundException('group not exists');
+    Object.assign(group, attrs);
+    const updatedGroup = await this.repo.save(group);
+    return updatedGroup;
   }
 
   async listUserGroups() {
