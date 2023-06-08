@@ -49,7 +49,12 @@ export class CustomersService {
     if (!id) {
       return null;
     }
-    const customer = await this.customerRepo.findOneBy({ id });
+    const customer = await this.customerRepo
+      .createQueryBuilder('customer')
+      .leftJoinAndSelect('customer.group', 'group')
+      .where({id})
+      .getOne();
+    if (!customer) throw new NotFoundException('customer not found')
     return customer;
   }
 
