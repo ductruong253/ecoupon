@@ -2,17 +2,14 @@ import { IsNumber, IsString } from 'class-validator';
 
 export class CreateUserGroupDto {
   @IsString()
-  groupName: string;
+  code: string;
 
   @IsString()
-  groupDescription: string;
+  description: string;
 
   @IsString()
   phoneNum: string;
 
   @IsString()
   address: string;
-
-  @IsNumber()
-  groupId: number;
 }
