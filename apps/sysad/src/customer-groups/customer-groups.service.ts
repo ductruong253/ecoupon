@@ -15,9 +15,9 @@ export class CustomerGroupsService {
     @InjectRepository(CustomerGroup) private repo: Repository<CustomerGroup>,
   ) {}
 
-  create(createGroupDto: CreateUserGroupDto) {
+  async create(createGroupDto: CreateUserGroupDto) {
     const code = createGroupDto.code;
-    const existingGroup = this.repo.findOneBy({ code });
+    const existingGroup = await this.repo.findOneBy({ code });
     if (existingGroup) throw new BadRequestException('group code existed');
     const newGroup = this.repo.create(createGroupDto);
     return this.repo.save(newGroup);
