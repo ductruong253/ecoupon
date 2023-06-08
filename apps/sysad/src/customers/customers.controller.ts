@@ -15,6 +15,12 @@ import { AuthGuard } from '@nestjs/passport';
 export class CustomersController {
   constructor(private customerService: CustomersService) {}
 
+  @Get('/list/all')
+  async getAllUsers() {
+    const customers = await this.customerService.listCustomers();
+    return {customers: customers}
+  }
+
   @Get('/id/:id')
   @UseGuards(AuthGuard('jwt'))
   async getById(@Param('id') id: string) {
