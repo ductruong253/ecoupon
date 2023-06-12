@@ -16,6 +16,6 @@ export class AuthController {
   async login(@Body() loginDto: UserLoginDto, @Session() session: any) {
     const payload = this.authService.login(loginDto);
     session.userId = (await payload).user.id;
-    return { 'access-token': (await payload).access_token };
+    return { 'access_token': (await payload).access_token };
   }
 }
