@@ -21,7 +21,7 @@ export class AuthController {
   async login(@Body() loginDto: LoginCustomerDto, @Session() session: any) {
     const payload = this.authService.login(loginDto);
     session.customerId = (await payload).customer.id;
-    return { 'access-token': (await payload).access_token };
+    return { access_token: (await payload).access_token };
   }
 
   //for testing
