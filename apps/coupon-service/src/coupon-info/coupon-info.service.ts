@@ -21,6 +21,7 @@ export class CouponInfoService {
       throw new BadRequestException('couponCode existed');
     }
     const couponInfo = this.repo.create(createDto);
+    console.log('creating new coupon ' + couponInfo.couponCode);
     couponInfo.approvalStatus = ApprovalStatusEnum.PENDING;
     couponInfo.createdDate = new Date();
     couponInfo.isActive = false;
@@ -80,6 +81,7 @@ export class CouponInfoService {
   }
 
   private async checkExistence(vendorCode: string, couponCode: string) {
+    console.log('checking for code existance')
     try {
       const coupon = await this.findOneByVendorCodeCouponCode(
         vendorCode,
