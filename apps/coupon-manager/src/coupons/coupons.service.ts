@@ -5,6 +5,7 @@ import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { CreateCouponDto } from './dtos/createCoupon.dto';
 import { CreateCouponInfoDto } from 'apps/coupon-service/src/coupon-info/dtos/create-coupon-info.dto';
 import { AxiosError, AxiosResponse } from 'axios';
+import { CustomersService } from '../customers/customers.service';
 
 @Injectable()
 export class CouponsService {
@@ -15,7 +16,7 @@ export class CouponsService {
   async fetchCoupons(customer: Customer) {
     const vendorCode = customer.group.code;
     const url =
-      this.COUPON_SERVICE_ENDPOINT + 'coupon/vendorCode/' + vendorCode;
+      this.COUPON_SERVICE_ENDPOINT + `coupon/vendorCode/${vendorCode}`;
     const config = {
       headers: {
         Authorization: 'Basic ' + this.SECRET,
@@ -35,6 +36,33 @@ export class CouponsService {
     } catch (err) {
       console.log(err);
       return [];
+    }
+  }
+
+  async fetchCouponByCode(couponCode: string, customer: Customer) {
+    const vendorCode = customer.group.code;
+    const url =
+      this.COUPON_SERVICE_ENDPOINT +
+      `coupon/vendorCode/${vendorCode}/couponCode/${couponCode}`;
+    const config = {
+      headers: {
+        Authorization: 'Basic ' + this.SECRET,
+      },
+    };
+    try {
+      console.log(`fetching coupon of ${vendorCode} with code ${couponCode}`);
+      const { data } = await firstValueFrom(
+        this.httpService.get<CouponInfo>(url, config).pipe(
+          catchError((error: AxiosError) => {
+            console.log(error.response.data);
+            throw 'An error happened!';
+          }),
+        ),
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+      return null;
     }
   }
 

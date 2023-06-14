@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   UseFilters,
   UseGuards,
@@ -25,12 +26,25 @@ export class CouponsController {
   }
 
   @Post('/')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), SessionGuard)
   async createCoupon(
     @CurrentCustomer() user: Customer,
     @Body() createDto: CreateCouponInfoDto,
   ) {
     const coupon = await this.couponsService.createCoupon(createDto, user);
+    return { coupon: coupon };
+  }
+
+  @Get('/couponCode/:couponCode')
+  @UseGuards(AuthGuard('jwt'), SessionGuard)
+  async getByCode(
+    @CurrentCustomer() user: Customer,
+    @Param('couponCode') couponCode: string,
+  ) {
+    const coupon = await this.couponsService.fetchCouponByCode(
+      couponCode,
+      user,
+    );
     return { coupon: coupon };
   }
 }

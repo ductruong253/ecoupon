@@ -62,6 +62,7 @@ export class CouponInfo {
 
   @Column()
   discountPercent: number;
+  
   @Column()
   createdBy: number;
 }
