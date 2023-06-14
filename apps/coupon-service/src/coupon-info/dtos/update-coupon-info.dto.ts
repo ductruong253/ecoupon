@@ -1,6 +1,15 @@
-import { IsDate, IsEnum, IsNumber, IsString, Max, Min } from 'class-validator';
+import {
+  IsDate,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 import { CouponTypeEnum, CurrencyEnum, CouponStatusEnum } from '@app/common';
 import { Type } from 'class-transformer';
+import { Optional } from '@nestjs/common';
 
 export class UpdateCouponInfoDto {
   @IsString()
@@ -42,4 +51,8 @@ export class UpdateCouponInfoDto {
   @Min(0)
   @Max(100)
   discountPercent: number;
+
+  @IsString()
+  @IsOptional()
+  approvedBy: string;
 }

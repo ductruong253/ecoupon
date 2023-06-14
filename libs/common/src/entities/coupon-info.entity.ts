@@ -62,7 +62,10 @@ export class CouponInfo {
 
   @Column()
   discountPercent: number;
-  
+
   @Column()
-  createdBy: number;
+  createdBy: string;
+
+  @Column({nullable: true})
+  approvedBy: string;
 }

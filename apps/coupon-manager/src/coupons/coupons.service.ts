@@ -82,7 +82,7 @@ export class CouponsService {
   ) {
     const url = this.COUPON_SERVICE_ENDPOINT + 'coupon/';
 
-    createDto.createdBy = user.id;
+    createDto.createdBy = user.fullName;
     createDto.vendorCode = user.group.code;
 
     const config = {
