@@ -1,10 +1,11 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, ValidationPipe } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthMiddleWare } from './interceptors/auth.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CouponInfoModule } from './coupon-info/coupon-info.module';
+import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [

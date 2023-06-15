@@ -16,14 +16,13 @@ export class AuthService {
       loginDto.email,
     );
     if (!customer) throw new UnauthorizedException('invalid credential');
-    if (this.comparePassword(loginDto.password, customer.password)) {
+    if (await this.comparePassword(loginDto.password, customer.password)) {
       const payload = { email: customer.email, sub: customer.id };
       return {
         access_token: this.jwtService.sign(payload),
         customer: customer,
       };
-    }
-    return null;
+    } else throw new UnauthorizedException('invalid credential');
   }
 
   async validateUser(email: string, password: string) {

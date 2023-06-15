@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { CustomerGroupsModule } from './customer-groups/customer-groups.module';
 import { CustomersModule } from './customers/customers.module';
 import { APP_PIPE } from '@nestjs/core';
+import { CouponsModule } from './coupons/coupons.module';
 const cookieSession = require('cookie-session');
 
 @Module({
@@ -33,6 +34,7 @@ const cookieSession = require('cookie-session');
     AuthModule,
     CustomerGroupsModule,
     CustomersModule,
+    CouponsModule,
   ],
   controllers: [AppController],
   providers: [

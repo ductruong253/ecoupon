@@ -1,23 +1,11 @@
-import {
-  IsDate,
-  IsEnum,
-  IsNumber,
-  IsOptional,
-  IsString,
-  Max,
-  Min,
-} from 'class-validator';
-import { CouponTypeEnum, CurrencyEnum } from '@app/common';
+import { IsDate, IsEnum, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
+import { CouponStatusEnum, CouponTypeEnum, CurrencyEnum } from '@app/common';
 
 import { Type } from 'class-transformer';
 
-export class CreateCouponInfoDto {
+export class CreateCouponDto {
   @IsString()
   description: string;
-
-  @IsString()
-  @IsOptional()
-  vendorCode: string;
 
   @IsDate()
   @Type(() => Date)
@@ -29,6 +17,12 @@ export class CreateCouponInfoDto {
 
   @IsString()
   couponCode: string;
+
+  @IsString()
+  vendorCode: string;
+
+  @IsEnum(CouponStatusEnum)
+  status: CouponStatusEnum;
 
   @IsNumber()
   @Type(() => Number)
@@ -57,8 +51,4 @@ export class CreateCouponInfoDto {
   @Max(100)
   @IsOptional()
   discountPercent: number;
-
-  @IsString()
-  @IsOptional()
-  createdBy: string;
 }

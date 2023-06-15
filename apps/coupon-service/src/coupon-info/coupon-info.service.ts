@@ -21,6 +21,7 @@ export class CouponInfoService {
       throw new BadRequestException('couponCode existed');
     }
     const couponInfo = this.repo.create(createDto);
+    console.log('creating new coupon ' + couponInfo.couponCode);
     couponInfo.approvalStatus = ApprovalStatusEnum.PENDING;
     couponInfo.createdDate = new Date();
     couponInfo.isActive = false;
@@ -60,14 +61,15 @@ export class CouponInfoService {
     existingCoupon.description = updateDto.description;
     existingCoupon.startDate = updateDto.startDate;
     existingCoupon.endDate = updateDto.endDate;
-    existingCoupon.couponCode = updateDto.couponCode;
     existingCoupon.voucherLimit = updateDto.voucherLimit;
     existingCoupon.conditions = updateDto.conditions;
     existingCoupon.type = updateDto.type;
     existingCoupon.maxDiscountValue = updateDto.maxDiscountValue;
     existingCoupon.unit = updateDto.unit;
     existingCoupon.discountPercent = updateDto.discountPercent;
-    return await this.repo.save(existingCoupon);
+    const updatedCoupon = await this.repo.save(existingCoupon);
+    console.log(`Update coupon code ${updateDto.couponCode} success`);
+    return updatedCoupon;
   }
 
   async approveCouponInfo(vendorCode: string, couponCode: string) {
@@ -80,15 +82,16 @@ export class CouponInfoService {
   }
 
   private async checkExistence(vendorCode: string, couponCode: string) {
+    console.log('checking for code existance...')
     try {
       const coupon = await this.findOneByVendorCodeCouponCode(
         vendorCode,
         couponCode,
       );
       if (coupon) return true;
-      return false;
     } catch (err) {
-      return false;
+      console.log(`error while checking existance of coupon ${couponCode}: ${err}`)
     }
+    return false;
   }
 }
