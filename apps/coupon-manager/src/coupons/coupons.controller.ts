@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseFilters,
   UseGuards,
 } from '@nestjs/common';
@@ -13,6 +14,7 @@ import { SessionGuard } from '../guards/session.guard';
 import { CurrentCustomer } from '../customers/decorators/current-customer.decorator';
 import { Customer } from '@app/common';
 import { CreateCouponInfoDto } from 'apps/coupon-service/src/coupon-info/dtos/create-coupon-info.dto';
+import { UpdateCouponDto } from './dtos/updateCoupon.dto';
 
 @Controller('coupons')
 export class CouponsController {
@@ -46,5 +48,17 @@ export class CouponsController {
       user,
     );
     return { coupon: coupon };
+  }
+
+  @Put()
+  async updateCoupon(
+    @CurrentCustomer() user: Customer,
+    @Body() updateDto: UpdateCouponDto,
+  ) {
+    const updatedCoupon = await this.couponsService.updateCoupon(
+      updateDto,
+      user,
+    );
+    return { coupon: updatedCoupon };
   }
 }

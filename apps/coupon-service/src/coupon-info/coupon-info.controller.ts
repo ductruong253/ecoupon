@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { CouponInfoService } from './coupon-info.service';
@@ -53,12 +54,12 @@ export class CouponInfoController {
     return await this.couponInfoService.create(body);
   }
 
-  @Patch()
+  @Put()
   async update(@Body() body: UpdateCouponInfoDto) {
     return await this.couponInfoService.updateCouponInfo(body);
   }
 
-  @Patch('vendorCode/:vendorCode/couponCode/:couponCode')
+  @Put('vendorCode/:vendorCode/couponCode/:couponCode')
   async approveCoupon(
     @Param('couponCode') couponCode: string,
     @Param('vendorCode') vendorCode: string,

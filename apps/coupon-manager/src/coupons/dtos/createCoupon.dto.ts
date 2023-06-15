@@ -1,5 +1,5 @@
 import { IsDate, IsEnum, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
-import { CouponTypeEnum, CurrencyEnum } from '@app/common';
+import { CouponStatusEnum, CouponTypeEnum, CurrencyEnum } from '@app/common';
 
 import { Type } from 'class-transformer';
 
@@ -17,6 +17,12 @@ export class CreateCouponDto {
 
   @IsString()
   couponCode: string;
+
+  @IsString()
+  vendorCode: string;
+
+  @IsEnum(CouponStatusEnum)
+  status: CouponStatusEnum;
 
   @IsNumber()
   @Type(() => Number)

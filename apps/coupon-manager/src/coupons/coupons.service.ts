@@ -1,9 +1,10 @@
 import { catchError, firstValueFrom, lastValueFrom } from 'rxjs';
-import { CouponInfo, Customer } from '@app/common';
+import { CouponInfo, CouponStatusEnum, Customer } from '@app/common';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, Injectable } from '@nestjs/common';
 import { CreateCouponInfoDto } from 'apps/coupon-service/src/coupon-info/dtos/create-coupon-info.dto';
 import { AxiosError, AxiosResponse } from 'axios';
+import { UpdateCouponDto } from './dtos/updateCoupon.dto';
 
 @Injectable()
 export class CouponsService {
@@ -97,6 +98,38 @@ export class CouponsService {
       return { data: data, statusCode: status, message: statusText };
     } catch (err) {
       console.log('failed to create new coupon: ' + err);
+      return err.response.data;
+    }
+  }
+
+  async updateCoupon(updateDto: UpdateCouponDto, user: Customer) {
+    updateDto.vendorCode = user.group.code;
+    updateDto.status = CouponStatusEnum.CREATED;
+    const { data, statusCode, message } = await this.sendUpdateRequest(
+      updateDto,
+      user,
+    );
+    console.log(message);
+    if (!data) throw new HttpException(message, statusCode);
+    return data;
+  }
+
+  private async sendUpdateRequest(updateDto: UpdateCouponDto, user: Customer) {
+    const url = this.COUPON_SERVICE_ENDPOINT + 'coupon/';
+    const config = {
+      headers: {
+        Authorization: 'Basic ' + this.SECRET,
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      console.log('updating coupon ' + updateDto.couponCode);
+      const { data, status, statusText }: AxiosResponse = await lastValueFrom(
+        this.httpService.put(url, updateDto, config),
+      );
+      return { data: data, statusCode: status, message: statusText };
+    } catch (err) {
+      console.log('failed to update coupon: ' + err);
       return err.response.data;
     }
   }
