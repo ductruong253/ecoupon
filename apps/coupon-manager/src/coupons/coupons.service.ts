@@ -1,11 +1,9 @@
 import { catchError, firstValueFrom, lastValueFrom } from 'rxjs';
 import { CouponInfo, Customer } from '@app/common';
 import { HttpService } from '@nestjs/axios';
-import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
-import { CreateCouponDto } from './dtos/createCoupon.dto';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateCouponInfoDto } from 'apps/coupon-service/src/coupon-info/dtos/create-coupon-info.dto';
 import { AxiosError, AxiosResponse } from 'axios';
-import { CustomersService } from '../customers/customers.service';
 
 @Injectable()
 export class CouponsService {

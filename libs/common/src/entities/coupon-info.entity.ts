@@ -40,7 +40,7 @@ export class CouponInfo {
 
   @Column()
   currentVoucherCount: number;
-  @Column()
+  @Column({ nullable: true })
   voucherLimit: number;
   @Column()
   conditions: string;
@@ -51,21 +51,22 @@ export class CouponInfo {
   })
   type: CouponTypeEnum;
 
-  @Column()
+  @Column({ nullable: true })
   maxDiscountValue: number;
 
   @Column({
     type: 'enum',
     enum: CurrencyEnum,
+    nullable: true,
   })
   unit: CurrencyEnum;
 
-  @Column()
+  @Column({ nullable: true })
   discountPercent: number;
 
   @Column()
   createdBy: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   approvedBy: string;
 }

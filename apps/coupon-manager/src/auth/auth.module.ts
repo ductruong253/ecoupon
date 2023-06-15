@@ -17,7 +17,7 @@ import { CustomerGroupsService } from 'apps/coupon-manager/src/customer-groups/c
     PassportModule,
     JwtModule.register({
       secret: 'secret',
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [AuthController],

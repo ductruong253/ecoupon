@@ -32,6 +32,7 @@ export class CreateCouponInfoDto {
 
   @IsNumber()
   @Type(() => Number)
+  @IsOptional()
   voucherLimit: number;
 
   @IsString()
@@ -43,15 +44,18 @@ export class CreateCouponInfoDto {
   @IsNumber()
   @Type(() => Number)
   @Min(0)
+  @IsOptional()
   maxDiscountValue: number;
 
   @IsEnum(CurrencyEnum)
+  @IsOptional()
   unit: CurrencyEnum;
 
   @IsNumber()
   @Type(() => Number)
   @Min(0)
   @Max(100)
+  @IsOptional()
   discountPercent: number;
 
   @IsString()
