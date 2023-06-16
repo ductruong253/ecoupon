@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthMiddleWare } from './interceptors/auth.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CouponInfoModule } from './coupon-info/coupon-info.module';
+import { CampaignModule } from './campaigns/campaigns.module';
 import { APP_PIPE } from '@nestjs/core';
 
 @Module({
@@ -28,7 +28,7 @@ import { APP_PIPE } from '@nestjs/core';
         };
       },
     }),
-    CouponInfoModule,
+    CampaignModule,
   ],
   controllers: [AppController],
   providers: [AppService],

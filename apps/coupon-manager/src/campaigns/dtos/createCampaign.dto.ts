@@ -1,9 +1,21 @@
-import { IsDate, IsEnum, IsNumber, IsOptional, IsString, Max, Min } from 'class-validator';
-import { CouponTypeEnum, CurrencyEnum } from '@app/common';
+import {
+  IsDate,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
+import {
+  CampaignStatusEnum,
+  CampaignTypeEnum,
+  CurrencyEnum,
+} from '@app/common';
 
 import { Type } from 'class-transformer';
 
-export class UpdateCouponDto {
+export class CreateCampaignDto {
   @IsString()
   description: string;
 
@@ -16,26 +28,24 @@ export class UpdateCouponDto {
   endDate: Date;
 
   @IsString()
-  couponCode: string;
+  campaignCode: string;
 
   @IsString()
-  @IsOptional()
   vendorCode: string;
 
-  @IsString()
-  @IsOptional()
-  status: string;
+  @IsEnum(CampaignStatusEnum)
+  status: CampaignStatusEnum;
 
   @IsNumber()
   @Type(() => Number)
   @IsOptional()
-  voucherLimit: number;
+  couponLimit: number;
 
   @IsString()
   conditions: string;
 
-  @IsEnum(CouponTypeEnum)
-  type: CouponTypeEnum;
+  @IsEnum(CampaignTypeEnum)
+  type: CampaignTypeEnum;
 
   @IsNumber()
   @Type(() => Number)
