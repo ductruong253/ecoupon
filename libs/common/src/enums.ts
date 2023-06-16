@@ -4,15 +4,15 @@ export enum ApprovalStatusEnum {
   PENDING = 'PENDING',
 }
 
-export enum CouponStatusEnum {
+export enum CampaignStatusEnum {
   CREATED = 'CREATED',
   RELEASED = 'RELEASED',
   EXPIRED = 'EXPIRED',
   CANCELED = 'CANCELED',
 }
 
-export enum CouponTypeEnum {
-  PRICE_DISCOUNT = ' PRICE_DISCOUNT',
+export enum CampaignTypeEnum {
+  PRICE_DISCOUNT = 'PRICE_DISCOUNT',
   SHIPPING_DISCOUNT = 'SHIPPING_DISCOUNT',
 }
 

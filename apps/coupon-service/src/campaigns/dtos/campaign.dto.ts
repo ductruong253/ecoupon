@@ -1,12 +1,12 @@
 import { Expose } from 'class-transformer';
 import {
   ApprovalStatusEnum,
-  CouponTypeEnum,
+  CampaignTypeEnum,
   CurrencyEnum,
-  CouponStatusEnum,
+  CampaignStatusEnum,
 } from '@app/common';
 
-export class CouponInfoDto {
+export class CampaignDto {
   @Expose()
   id: number;
   @Expose()
@@ -20,21 +20,21 @@ export class CouponInfoDto {
   @Expose()
   createdDate: Date;
   @Expose()
-  couponCode: string;
+  campaignCode: string;
   @Expose()
   approvalStatus: ApprovalStatusEnum;
   @Expose()
-  status: CouponStatusEnum;
+  status: CampaignStatusEnum;
   @Expose()
   isActive: boolean;
   @Expose()
-  currentVoucherCount: number;
+  currentCouponCount: number;
   @Expose()
-  voucherLimit: number;
+  couponLimit: number;
   @Expose()
   conditions: string;
   @Expose()
-  type: CouponTypeEnum;
+  type: CampaignTypeEnum;
   @Expose()
   maxDiscountValue: number;
   @Expose()

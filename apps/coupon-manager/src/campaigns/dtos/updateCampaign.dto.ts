@@ -7,17 +7,13 @@ import {
   Max,
   Min,
 } from 'class-validator';
-import { CouponTypeEnum, CurrencyEnum } from '@app/common';
+import { CampaignTypeEnum, CurrencyEnum } from '@app/common';
 
 import { Type } from 'class-transformer';
 
-export class CreateCouponInfoDto {
+export class UpdateCampaignDto {
   @IsString()
   description: string;
-
-  @IsString()
-  @IsOptional()
-  vendorCode: string;
 
   @IsDate()
   @Type(() => Date)
@@ -28,18 +24,26 @@ export class CreateCouponInfoDto {
   endDate: Date;
 
   @IsString()
-  couponCode: string;
+  campaignCode: string;
+
+  @IsString()
+  @IsOptional()
+  vendorCode: string;
+
+  @IsString()
+  @IsOptional()
+  status: string;
 
   @IsNumber()
   @Type(() => Number)
   @IsOptional()
-  voucherLimit: number;
+  couponLimit: number;
 
   @IsString()
   conditions: string;
 
-  @IsEnum(CouponTypeEnum)
-  type: CouponTypeEnum;
+  @IsEnum(CampaignTypeEnum)
+  type: CampaignTypeEnum;
 
   @IsNumber()
   @Type(() => Number)
@@ -57,8 +61,4 @@ export class CreateCouponInfoDto {
   @Max(100)
   @IsOptional()
   discountPercent: number;
-
-  @IsString()
-  @IsOptional()
-  createdBy: string;
 }

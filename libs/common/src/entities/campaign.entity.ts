@@ -1,13 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import {
   ApprovalStatusEnum,
-  CouponTypeEnum,
+  CampaignTypeEnum,
   CurrencyEnum,
-  CouponStatusEnum,
+  CampaignStatusEnum,
 } from '../enums';
 
 @Entity()
-export class CouponInfo {
+export class Campaign {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
@@ -21,7 +21,7 @@ export class CouponInfo {
   @Column()
   createdDate: Date;
   @Column()
-  couponCode: string;
+  campaignCode: string;
 
   @Column({
     type: 'enum',
@@ -34,22 +34,22 @@ export class CouponInfo {
 
   @Column({
     type: 'enum',
-    enum: CouponStatusEnum,
+    enum: CampaignStatusEnum,
   })
-  status: CouponStatusEnum;
+  status: CampaignStatusEnum;
 
   @Column()
-  currentVoucherCount: number;
+  currentCouponCount: number;
   @Column({ nullable: true })
-  voucherLimit: number;
+  couponLimit: number;
   @Column()
   conditions: string;
 
   @Column({
     type: 'enum',
-    enum: CouponTypeEnum,
+    enum: CampaignTypeEnum,
   })
-  type: CouponTypeEnum;
+  type: CampaignTypeEnum;
 
   @Column({ nullable: true })
   maxDiscountValue: number;
