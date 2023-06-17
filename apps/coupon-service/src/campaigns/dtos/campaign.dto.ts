@@ -4,6 +4,7 @@ import {
   CampaignTypeEnum,
   CurrencyEnum,
   CampaignStatusEnum,
+  CampaignDistribution,
 } from '@app/common';
 
 export class CampaignDto {
@@ -43,4 +44,6 @@ export class CampaignDto {
   discountPercent: number;
   @Expose()
   createdBy: string;
+  @Expose()
+  distribution: CampaignDistribution;
 }

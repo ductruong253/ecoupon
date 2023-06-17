@@ -8,6 +8,7 @@ import {
   Min,
 } from 'class-validator';
 import {
+  CampaignDistribution,
   CampaignStatusEnum,
   CampaignTypeEnum,
   CurrencyEnum,
@@ -63,4 +64,8 @@ export class CreateCampaignDto {
   @Max(100)
   @IsOptional()
   discountPercent: number;
+
+  @IsEnum(CampaignDistribution)
+  @IsOptional()
+  distribution: CampaignDistribution;
 }

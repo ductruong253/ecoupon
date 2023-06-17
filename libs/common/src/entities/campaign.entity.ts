@@ -4,6 +4,7 @@ import {
   CampaignTypeEnum,
   CurrencyEnum,
   CampaignStatusEnum,
+  CampaignDistribution,
 } from '../enums';
 import { Coupon } from './coupon.entity';
 
@@ -73,4 +74,7 @@ export class Campaign {
 
   @OneToMany(() => Coupon, (coupon) => coupon.campaign)
   coupons: Coupon[];
+
+  @Column({type: 'enum', enum: CampaignDistribution, default: CampaignDistribution.INDIVIDUAL})
+  distribution: CampaignDistribution;
 }

@@ -25,5 +25,10 @@ export enum CurrencyEnum {
 
 export enum GameStatuses {
   ACTIVE = 'ACTIVE',
-  DEACTIVE = 'DEACTIVE'
+  DEACTIVE = 'DEACTIVE',
+}
+
+export enum CampaignDistribution {
+  INDIVIDUAL = 'INDIVIDUAL',
+  GAMEPLAY = 'GAMEPLAY',
 }
