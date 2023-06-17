@@ -54,12 +54,15 @@ export class CampaignService {
   }
 
   async updateCampaign(updateDto: UpdateCampaignDto) {
-    const existingCampaign: Campaign = await this.findOneByVendorCodeCampaignCode(
-      updateDto.vendorCode,
-      updateDto.campaignCode,
-    );
+    const existingCampaign: Campaign =
+      await this.findOneByVendorCodeCampaignCode(
+        updateDto.vendorCode,
+        updateDto.campaignCode,
+      );
     if (existingCampaign.approvalStatus === ApprovalStatusEnum.APPROVED)
-      throw new BadRequestException('updating approved campaign is not allowed');
+      throw new BadRequestException(
+        'updating approved campaign is not allowed',
+      );
     existingCampaign.approvalStatus = ApprovalStatusEnum.PENDING;
     existingCampaign.description = updateDto.description;
     existingCampaign.startDate = updateDto.startDate;
@@ -98,5 +101,21 @@ export class CampaignService {
       );
     }
     return false;
+  }
+
+  async linkNewCoupon(campaignCode: string) {
+    const campaign = await this.repo.findOneBy({ campaignCode });
+    if (!campaign) throw new BadRequestException('campaign not found');
+    if (campaign.status !== CampaignStatusEnum.RELEASED || !campaign.isActive)
+      throw new BadRequestException('campaign is not available to be claimed');
+    if (
+      campaign.couponLimit !== 0 &&
+      campaign.currentCouponCount >= campaign.couponLimit
+    )
+      throw new BadRequestException('coupons limit exceeded for this campaign');
+
+    campaign.currentCouponCount ++;
+    await this.repo.save(campaign);
+    return campaign;
   }
 }

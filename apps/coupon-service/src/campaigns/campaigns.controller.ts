@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { CampaignService } from './campaigns.service';
@@ -62,5 +63,13 @@ export class CampaignController {
     @Param('vendorCode') vendorCode: string,
   ) {
     return await this.campaignService.approveCampaign(vendorCode, campaignCode);
+  }
+
+  @Get('linkNewCoupon/campaignCode/:campaignCode')
+  async linkNewCoupon(@Param('campaignCode') campaignCode: string) {
+    const claimedCampaign = await this.campaignService.linkNewCoupon(
+      campaignCode,
+    );
+    return claimedCampaign;
   }
 }

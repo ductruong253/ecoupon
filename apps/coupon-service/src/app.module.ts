@@ -37,7 +37,15 @@ import { GamesModule } from './games/games.module';
     GamesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        whitelist: true,
+      }),
+    },
+  ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

@@ -13,4 +13,7 @@ export class Coupon {
 
     @ManyToOne(() => Campaign, (campaign) => campaign.coupons)
     campaign: Campaign;
+
+    @Column({ type: 'timestamp with time zone' })
+    claimedAt: Date
 }
