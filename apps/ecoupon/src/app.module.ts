@@ -7,6 +7,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 const cookieSession = require('cookie-session');
 import { APP_PIPE } from '@nestjs/core';
+import { CouponsController } from './coupons/coupons.controller';
+import { CouponsModule } from './coupons/coupons.module';
+import { CampaignsModule } from './campaigns/campaigns.module';
+import { GameplaysModule } from './gameplays/gameplays.module';
+import { GamesModule } from './games/games.module';
 
 @Module({
   imports: [
@@ -31,8 +36,12 @@ import { APP_PIPE } from '@nestjs/core';
     }),
     UserModule,
     AuthModule,
+    CouponsModule,
+    CampaignsModule,
+    GameplaysModule,
+    GamesModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, CouponsController],
   providers: [
     AppService,
     {

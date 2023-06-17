@@ -1,4 +1,4 @@
-import { EcouponUser } from '@app/common';
+import { Coupon, EcouponUser, GamePlay } from '@app/common';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,7 +10,7 @@ import { JwtStrategy } from '../auth/jwt.strategy';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([EcouponUser]),
+    TypeOrmModule.forFeature([EcouponUser, GamePlay, Coupon]),
     JwtModule.register({
       secret: 'secret',
       signOptions: {
