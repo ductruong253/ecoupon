@@ -72,4 +72,16 @@ export class CampaignController {
     );
     return claimedCampaign;
   }
+
+  @Get('/individuals')
+  async getIndividualsCampaigns(@Query('userId') userId: number) {
+    const campaigns = await this.campaignService.getIndividualCampaigns(userId);
+    return campaigns;
+  }
+
+  @Get('campaignId/:campaignId')
+  async getCampaignById(@Param('campaignId') campaignId: string) {
+    const campaign = await this.campaignService.getById(parseInt(campaignId));
+    return campaign;
+  }
 }

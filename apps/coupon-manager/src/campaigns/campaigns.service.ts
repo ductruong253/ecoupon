@@ -12,7 +12,7 @@ export class CampaignsService {
   private SECRET = 'secret';
   private COUPON_SERVICE_ENDPOINT = 'http://localhost:8080/api/';
 
-  async fetchCoupons(customer: Customer) {
+  async fetchCampaigns(customer: Customer) {
     const vendorCode = customer.group.code;
     const url =
       this.COUPON_SERVICE_ENDPOINT + `campaigns/vendorCode/${vendorCode}`;
@@ -38,7 +38,7 @@ export class CampaignsService {
     }
   }
 
-  async fetchCouponByCode(campaignCode: string, customer: Customer) {
+  async fetchCampaignByCode(campaignCode: string, customer: Customer) {
     const vendorCode = customer.group.code;
     const url =
       this.COUPON_SERVICE_ENDPOINT +
@@ -67,7 +67,7 @@ export class CampaignsService {
     }
   }
 
-  async createCoupon(createDto: CreateCampaignDto, user: Customer) {
+  async createCampaign(createDto: CreateCampaignDto, user: Customer) {
     const { data, statusCode, message } = await this.sendCreateRequest(
       createDto,
       user,

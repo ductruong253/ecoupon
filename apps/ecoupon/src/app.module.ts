@@ -41,7 +41,7 @@ import { GamesModule } from './games/games.module';
     GameplaysModule,
     GamesModule,
   ],
-  controllers: [AppController, CouponsController],
+  controllers: [AppController],
   providers: [
     AppService,
     {

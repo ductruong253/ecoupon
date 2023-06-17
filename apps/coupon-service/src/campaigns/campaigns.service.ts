@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Campaign } from '@app/common';
+import { Campaign, CampaignDistribution } from '@app/common';
 import { CreateCampaignDto } from './dtos/create-campaign.dto';
 import { ApprovalStatusEnum, CampaignStatusEnum } from '@app/common';
 import { UpdateCampaignDto } from './dtos/update-campaign.dto';
@@ -114,8 +114,32 @@ export class CampaignService {
     )
       throw new BadRequestException('coupons limit exceeded for this campaign');
 
-    campaign.currentCouponCount ++;
+    campaign.currentCouponCount++;
     await this.repo.save(campaign);
+    return campaign;
+  }
+
+  async getIndividualCampaigns(userId: number) {
+    const individual = CampaignDistribution.INDIVIDUAL;
+    const query = this.repo
+      .createQueryBuilder()
+      .select('campaign')
+      .from(Campaign, 'campaign')
+      .leftJoinAndSelect('campaign.coupons', 'coupon')
+      .leftJoinAndSelect('coupon.user', 'user')
+      .where(`campaign.distribution = :individual`, { individual })
+      .andWhere(
+        `campaign.id NOT IN
+    (SELECT coupon.campaignId FROM coupon WHERE coupon.userId = :userId)`,
+        { userId },
+      );
+    const campaigns = await query.getMany();
+    return campaigns;
+  }
+
+  async getById(id: number) {
+    const campaign = await this.repo.findOneBy({ id });
+    if (!campaign) throw new NotFoundException('campaign not found')
     return campaign;
   }
 }
