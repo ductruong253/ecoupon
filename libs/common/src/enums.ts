@@ -22,3 +22,8 @@ export enum CurrencyEnum {
   CAD = 'CAD',
   JPY = 'JPY',
 }
+
+export enum GameStatuses {
+  ACTIVE = 'ACTIVE',
+  DEACTIVE = 'DEACTIVE'
+}

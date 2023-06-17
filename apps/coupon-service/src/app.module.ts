@@ -6,6 +6,9 @@ import { AuthMiddleWare } from './interceptors/auth.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CampaignModule } from './campaigns/campaigns.module';
 import { APP_PIPE } from '@nestjs/core';
+import { CouponsModule } from './coupons/coupons.module';
+import { GameplayModule } from './gameplays/gameplays.module';
+import { GamesModule } from './games/games.module';
 
 @Module({
   imports: [
@@ -29,6 +32,9 @@ import { APP_PIPE } from '@nestjs/core';
       },
     }),
     CampaignModule,
+    CouponsModule,
+    GameplayModule,
+    GamesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,10 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import {
   ApprovalStatusEnum,
   CampaignTypeEnum,
   CurrencyEnum,
   CampaignStatusEnum,
 } from '../enums';
+import { Coupon } from './coupon.entity';
 
 @Entity()
 export class Campaign {
@@ -69,4 +70,7 @@ export class Campaign {
 
   @Column({ nullable: true })
   approvedBy: string;
+
+  @OneToMany(() => Coupon, (coupon) => coupon.campaign)
+  coupons: Coupon[];
 }
