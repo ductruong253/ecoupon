@@ -23,4 +23,10 @@ export class GamesController {
     const game = await this.gamesService.getGameDetail(parseInt(id));
     return game;
   }
+
+  @Get()
+  async getGameList() {
+    const games = await this.gamesService.getAllGames();
+    return games;
+  }
 }

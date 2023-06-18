@@ -8,7 +8,8 @@ import { CreateGameDto } from './dtos/createGame.dto';
 export class GamesService {
   constructor(
     @InjectRepository(Game) private readonly gameRepo: Repository<Game>,
-    @InjectRepository(Campaign) private readonly campaignRepo: Repository<Campaign>,
+    @InjectRepository(Campaign)
+    private readonly campaignRepo: Repository<Campaign>,
   ) {}
 
   async createGame(createGameDto: CreateGameDto) {
@@ -36,5 +37,10 @@ export class GamesService {
     const detailGame = Object.fromEntries(Object.entries(game));
     detailGame.gameContent = campaigns;
     return detailGame;
+  }
+
+  async getAllGames() {
+    const games = await this.gameRepo.find();
+    return games;
   }
 }
