@@ -7,7 +7,7 @@ import {
   Max,
   Min,
 } from 'class-validator';
-import { CampaignTypeEnum, CurrencyEnum } from '@app/common';
+import { CampaignDistribution, CampaignTypeEnum, CurrencyEnum } from '@app/common';
 
 import { Type } from 'class-transformer';
 
@@ -61,4 +61,8 @@ export class CreateCampaignDto {
   @IsString()
   @IsOptional()
   createdBy: string;
+
+  @IsEnum(CampaignDistribution)
+  @IsOptional()
+  distribution: CampaignDistribution;
 }

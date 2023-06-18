@@ -14,9 +14,7 @@ import * as bcrypt from 'bcrypt';
 export class CustomersService {
   constructor(
     @InjectRepository(Customer) private customerRepo: Repository<Customer>,
-    @InjectRepository(CustomerGroup)
-    private groupRepo: Repository<CustomerGroup>,
-    private groupService: CustomerGroupsService,
+    private readonly groupService: CustomerGroupsService,
   ) {}
 
   async createCustomer(customerDto: CreateCustomerDto) {

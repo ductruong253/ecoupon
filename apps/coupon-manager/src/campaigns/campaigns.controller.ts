@@ -23,17 +23,17 @@ export class CampaignsController {
   @Get('/')
   @UseGuards(AuthGuard('jwt'), SessionGuard)
   async whoAmI(@CurrentCustomer() user: Customer) {
-    const campaigns = await this.campaignsService.fetchCoupons(user);
+    const campaigns = await this.campaignsService.fetchCampaigns(user);
     return { campaigns: campaigns };
   }
 
   @Post('/')
   @UseGuards(AuthGuard('jwt'), SessionGuard)
-  async createCoupon(
+  async createCampaign(
     @CurrentCustomer() user: Customer,
     @Body() createDto: CreateCampaignDto,
   ) {
-    const campaign = await this.campaignsService.createCoupon(createDto, user);
+    const campaign = await this.campaignsService.createCampaign(createDto, user);
     return { campaign: campaign };
   }
 
@@ -43,7 +43,7 @@ export class CampaignsController {
     @CurrentCustomer() user: Customer,
     @Param('campaignCode') campaignCode: string,
   ) {
-    const campaign = await this.campaignsService.fetchCouponByCode(
+    const campaign = await this.campaignsService.fetchCampaignByCode(
       campaignCode,
       user,
     );

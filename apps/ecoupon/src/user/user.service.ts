@@ -23,7 +23,7 @@ export class UserService {
     if (!id) {
       return null;
     }
-    const customer = await this.repo.findOneBy({ id });
-    return customer;
+    const user = await this.repo.findOneBy({ id });
+    return user;
   }
 }

@@ -22,3 +22,13 @@ export enum CurrencyEnum {
   CAD = 'CAD',
   JPY = 'JPY',
 }
+
+export enum GameStatuses {
+  ACTIVE = 'ACTIVE',
+  DEACTIVE = 'DEACTIVE',
+}
+
+export enum CampaignDistribution {
+  INDIVIDUAL = 'INDIVIDUAL',
+  GAMEPLAY = 'GAMEPLAY',
+}

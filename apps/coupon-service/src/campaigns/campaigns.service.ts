@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Campaign } from '@app/common';
+import { Campaign, CampaignDistribution } from '@app/common';
 import { CreateCampaignDto } from './dtos/create-campaign.dto';
 import { ApprovalStatusEnum, CampaignStatusEnum } from '@app/common';
 import { UpdateCampaignDto } from './dtos/update-campaign.dto';
@@ -24,9 +24,9 @@ export class CampaignService {
     console.log('creating new campaign ' + campaign.campaignCode);
     campaign.approvalStatus = ApprovalStatusEnum.PENDING;
     campaign.createdDate = new Date();
-    campaign.isActive = false;
+    campaign.isActive = true;
     campaign.currentCouponCount = 0;
-    campaign.status = CampaignStatusEnum.CREATED;
+    campaign.status = CampaignStatusEnum.RELEASED;
     this.repo.save(campaign);
     return campaign;
   }
@@ -54,12 +54,15 @@ export class CampaignService {
   }
 
   async updateCampaign(updateDto: UpdateCampaignDto) {
-    const existingCampaign: Campaign = await this.findOneByVendorCodeCampaignCode(
-      updateDto.vendorCode,
-      updateDto.campaignCode,
-    );
+    const existingCampaign: Campaign =
+      await this.findOneByVendorCodeCampaignCode(
+        updateDto.vendorCode,
+        updateDto.campaignCode,
+      );
     if (existingCampaign.approvalStatus === ApprovalStatusEnum.APPROVED)
-      throw new BadRequestException('updating approved campaign is not allowed');
+      throw new BadRequestException(
+        'updating approved campaign is not allowed',
+      );
     existingCampaign.approvalStatus = ApprovalStatusEnum.PENDING;
     existingCampaign.description = updateDto.description;
     existingCampaign.startDate = updateDto.startDate;
@@ -98,5 +101,45 @@ export class CampaignService {
       );
     }
     return false;
+  }
+
+  async linkNewCoupon(campaignCode: string) {
+    const campaign = await this.repo.findOneBy({ campaignCode });
+    if (!campaign) throw new BadRequestException('campaign not found');
+    if (campaign.status !== CampaignStatusEnum.RELEASED || !campaign.isActive)
+      throw new BadRequestException('campaign is not available to be claimed');
+    if (
+      campaign.couponLimit !== 0 &&
+      campaign.currentCouponCount >= campaign.couponLimit
+    )
+      throw new BadRequestException('coupons limit exceeded for this campaign');
+
+    campaign.currentCouponCount++;
+    await this.repo.save(campaign);
+    return campaign;
+  }
+
+  async getIndividualCampaigns(userId: number) {
+    const individual = CampaignDistribution.INDIVIDUAL;
+    const query = this.repo
+      .createQueryBuilder()
+      .select('campaign')
+      .from(Campaign, 'campaign')
+      .leftJoinAndSelect('campaign.coupons', 'coupon')
+      .leftJoinAndSelect('coupon.user', 'user')
+      .where(`campaign.distribution = :individual`, { individual })
+      .andWhere(
+        `campaign.id NOT IN
+    (SELECT coupon.campaignId FROM coupon WHERE coupon.userId = :userId)`,
+        { userId },
+      );
+    const campaigns = await query.getMany();
+    return campaigns;
+  }
+
+  async getById(id: number) {
+    const campaign = await this.repo.findOneBy({ id });
+    if (!campaign) throw new NotFoundException('campaign not found')
+    return campaign;
   }
 }
