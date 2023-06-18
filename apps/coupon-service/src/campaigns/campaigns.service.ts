@@ -24,9 +24,9 @@ export class CampaignService {
     console.log('creating new campaign ' + campaign.campaignCode);
     campaign.approvalStatus = ApprovalStatusEnum.PENDING;
     campaign.createdDate = new Date();
-    campaign.isActive = false;
+    campaign.isActive = true;
     campaign.currentCouponCount = 0;
-    campaign.status = CampaignStatusEnum.CREATED;
+    campaign.status = CampaignStatusEnum.RELEASED;
     this.repo.save(campaign);
     return campaign;
   }

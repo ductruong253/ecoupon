@@ -28,8 +28,12 @@ export class AuthService {
     createUserDto.password = await this.hashPassword(password);
     // Create a new user and save it
     const newUser = await this.userService.create(createUserDto);
-    // return the user
-    return newUser;
+    // return the user with token
+    const payload = { email: newUser.email, sub: newUser.id };
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: newUser,
+    };
   }
 
   async login(loginDto: UserLoginDto) {

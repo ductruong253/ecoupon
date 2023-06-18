@@ -13,7 +13,7 @@ export class AuthController {
 
   @Post('/signup')
   async createUser(@Body() createUserDto: CreateEcouponUserDto) {
-    return this.authService.signup(createUserDto);
+    return await this.authService.signup(createUserDto);
   }
 
   @Post('/login')
