@@ -58,4 +58,15 @@ export class CouponsService {
       return null;
     }
   }
+
+  async listCouponsClaimed(user: EcouponUser) {
+    const query = this.couponRepo
+      .createQueryBuilder()
+      .select('coupon')
+      .from(Coupon, 'coupon')
+      .leftJoinAndSelect('coupon.campaign', 'campaign')
+      .where('coupon.userId = :userId', { userId: user.id });
+    const coupons = await query.getMany();
+    return coupons;
+  }
 }

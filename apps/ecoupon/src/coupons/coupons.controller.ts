@@ -11,8 +11,18 @@ export class CouponsController {
 
   @Get('/claim')
   @UseGuards(AuthGuard('jwt'), SessionGuard)
-  async claimCoupon(@Query('campaignId') campaignId: number, @CurrentUser() user: EcouponUser){
+  async claimCoupon(
+    @Query('campaignId') campaignId: number,
+    @CurrentUser() user: EcouponUser,
+  ) {
     const coupon = await this.couponService.createCoupon(user, campaignId);
     return coupon;
+  }
+
+  @Get('/inventory')
+  @UseGuards(AuthGuard('jwt'), SessionGuard)
+  async getInventory(@CurrentUser() user: EcouponUser) {
+    const coupons = await this.couponService.listCouponsClaimed(user);
+    return { coupons: coupons };
   }
 }
